@@ -1,10 +1,15 @@
 const playerText = document.querySelector("#player-text");
 const computerText = document.querySelector("#computer-text");
 const resultText = document.querySelector("#result-text");
+const overallWinner = document.querySelector("#overall-winner-text");
 const choiceBtns = document.querySelectorAll(".choice-button");
 let player;
 let computer;
 let result;
+
+let computerScoreOutOf5 = 0;
+let userScoreOutOf5 = 0;
+console.log(userScoreOutOf5);
 
 choiceBtns.forEach(button => button.addEventListener("click", () => {
     player = button.textContent;
@@ -12,7 +17,26 @@ choiceBtns.forEach(button => button.addEventListener("click", () => {
     playerText.textContent = `Player: ${player}`;
     computerText.textContent = `Computer: ${computer}`;
     resultText.textContent = checkWinner();
+    if (resultText.textContent === "You win!") {
+        userScoreOutOf5 ++;
+        console.log("user", userScoreOutOf5);
+        if (userScoreOutOf5 === 3) {
+            overallWinner.textContent = "Overall Winner: Player!";
+            userScoreOutOf5 = 0;
+            computerScoreOutOf5 = 0;
+        }
+    } else if (resultText.textContent == "You Lose!") {
+        computerScoreOutOf5 ++;
+        console.log("computer", computerScoreOutOf5);
+        if (computerScoreOutOf5 === 3) {
+            overallWinner.textContent = "Overall Winner: Computer!";
+            userScoreOutOf5 = 0;
+            computerScoreOutOf5 = 0;
+        }
+    }
+    
 } ));
+
 
 function computerTurn() {
     const randNum = Math.floor(Math.random() * 3 ) + 1;
@@ -26,7 +50,6 @@ function computerTurn() {
             break;
         case 3:
             computer = "Scissors";
-            break;
     }
 }
 
@@ -38,6 +61,45 @@ function checkWinner() {
     } else if (computer == "Paper") {
         return (player == "Scissors") ? "You win!" : "You Lose!"
     } else if (computer == "Scissors") {
-        return (player == "Rock") ? "You Win!" : "You Lose!"
+        return (player == "Rock") ? "You win!" : "You Lose!"
     }
 }
+
+// function keepScore() {
+//     if (resultText.textcontent == "You win!") {
+//         userScoreOutOf5 = userScoreOutOf5 + 1;
+//         console.log(userScoreOutOf5);
+//     }
+// }
+// keepScore();
+
+// function keepScore() {
+//     if (document.querySelector("#result-text").innerHTML === "You win!") {
+//         userScoreOutOf5 ++
+//         overallWinner.textContent = userScoreOutOf5;
+//     }
+// }
+
+// keepScore();
+
+// function keepScore() {
+//     if (checkWinner() == "You win!") {
+//         userScoreOutOf5 = userScoreOutOf5 + 1;
+//         console.log(userScoreOutOf5);
+//     }
+// }
+
+// keepScore();
+
+// function keepScore() {
+//     if (resultText.textContent === "You win!") {
+//         userScoreOutOf5 = userScoreOutOf5 + 1;
+//     } else if (resultText.textContent === "You Lose!") {
+//         computerScoreOutOf5 = computerScoreOutOf5 + 1;
+//     }
+//         console.log(userScoreOutOf5);
+//         console.log(computerScoreOutOf5);
+    
+// }
+
+// keepScore();
