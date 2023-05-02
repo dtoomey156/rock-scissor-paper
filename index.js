@@ -17,6 +17,7 @@ choiceBtns.forEach(button => button.addEventListener("click", () => {
     playerText.textContent = `Player: ${player}`;
     computerText.textContent = `Computer: ${computer}`;
     resultText.textContent = checkWinner();
+    overallWinner.textContent = "Overall Winner: ";
     if (resultText.textContent === "You win!") {
         userScoreOutOf5 ++;
         console.log("user", userScoreOutOf5);
