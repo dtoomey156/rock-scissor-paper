@@ -1,3 +1,4 @@
+const roundText = document.querySelector("#round-text");
 const playerText = document.querySelector("#player-text");
 const computerText = document.querySelector("#computer-text");
 const resultText = document.querySelector("#result-text");
@@ -7,32 +8,41 @@ let player;
 let computer;
 let result;
 
+let round = 1;
 let computerScoreOutOf5 = 0;
 let userScoreOutOf5 = 0;
-console.log(userScoreOutOf5);
+console.log("user", userScoreOutOf5);
+console.log("computer", computerScoreOutOf5);
 
 choiceBtns.forEach(button => button.addEventListener("click", () => {
     player = button.textContent;
     computerTurn();
+    roundText.textContent = `Round: ${round}`;
     playerText.textContent = `Player: ${player}`;
     computerText.textContent = `Computer: ${computer}`;
     resultText.textContent = checkWinner();
-    overallWinner.textContent = "Overall Winner: ";
+    overallWinner.textContent = "Best Out of Five: ";
     if (resultText.textContent === "You win!") {
         userScoreOutOf5 ++;
         console.log("user", userScoreOutOf5);
         if (userScoreOutOf5 === 3) {
-            overallWinner.textContent = "Overall Winner: Player!";
+            round ++;
+            overallWinner.textContent = "Best Out of Five: Player!";
             userScoreOutOf5 = 0;
             computerScoreOutOf5 = 0;
+            console.log("user", userScoreOutOf5);
+            console.log("computer", computerScoreOutOf5);
         }
     } else if (resultText.textContent == "You Lose!") {
         computerScoreOutOf5 ++;
         console.log("computer", computerScoreOutOf5);
         if (computerScoreOutOf5 === 3) {
-            overallWinner.textContent = "Overall Winner: Computer!";
+            overallWinner.textContent = "Best Out of Five: Computer!";
             userScoreOutOf5 = 0;
             computerScoreOutOf5 = 0;
+            round ++;
+            console.log("user", userScoreOutOf5);
+            console.log("computer", computerScoreOutOf5);
         }
     }
     
