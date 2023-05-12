@@ -1,4 +1,6 @@
 const roundText = document.querySelector("#round-text");
+const computerScoreText = document.querySelector("#computer-score-text");
+const userScoreText = document.querySelector("#player-score-text");
 const playerText = document.querySelector("#player-text");
 const computerText = document.querySelector("#computer-text");
 const resultText = document.querySelector("#result-text");
@@ -11,6 +13,8 @@ let result;
 let round = 1;
 let computerScoreOutOf5 = 0;
 let userScoreOutOf5 = 0;
+let userScore = 0;
+let computerScore = 0;
 console.log("user", userScoreOutOf5);
 console.log("computer", computerScoreOutOf5);
 
@@ -18,15 +22,20 @@ choiceBtns.forEach(button => button.addEventListener("click", () => {
     player = button.textContent;
     computerTurn();
     roundText.textContent = `Round: ${round}`;
+    
+    
     playerText.textContent = `Player: ${player}`;
     computerText.textContent = `Computer: ${computer}`;
     resultText.textContent = checkWinner();
     overallWinner.textContent = "Best Out of Five: ";
     if (resultText.textContent === "You win!") {
         userScoreOutOf5 ++;
+        console.log("user overall score", userScore)
         console.log("user", userScoreOutOf5);
         if (userScoreOutOf5 === 3) {
             round ++;
+            userScore ++;
+            userScoreText.textContent = `Player score: ${userScore}`;
             overallWinner.textContent = "Best Out of Five: Player!";
             userScoreOutOf5 = 0;
             computerScoreOutOf5 = 0;
@@ -37,10 +46,13 @@ choiceBtns.forEach(button => button.addEventListener("click", () => {
         computerScoreOutOf5 ++;
         console.log("computer", computerScoreOutOf5);
         if (computerScoreOutOf5 === 3) {
-            overallWinner.textContent = "Best Out of Five: Computer!";
+            
             userScoreOutOf5 = 0;
             computerScoreOutOf5 = 0;
             round ++;
+            computerScore ++;
+            computerScoreText.textContent = `Computer score: ${computerScore}`;
+            overallWinner.textContent = "Best Out of Five: Computer!";
             console.log("user", userScoreOutOf5);
             console.log("computer", computerScoreOutOf5);
         }
